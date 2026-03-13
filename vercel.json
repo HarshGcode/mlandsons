@@ -1,0 +1,15 @@
+{
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "framework": "vite",
+  "rewrites": [
+    { "source": "/api/products", "destination": "/api/products" },
+    { "source": "/api/categories", "destination": "/api/categories" },
+    { "source": "/api/gift-packages", "destination": "/api/gift-packages" },
+    { "source": "/api/blog-posts", "destination": "/api/blog-posts" },
+    { "source": "/api/platform-stats", "destination": "/api/platform-stats" },
+    { "source": "/api/contact", "destination": "/api/contact" },
+    { "source": "/api/health", "destination": "/api/health" },
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
+}

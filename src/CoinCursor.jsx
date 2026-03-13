@@ -14,8 +14,12 @@ const CoinCursor = () => {
       setIsActive(Boolean(target?.closest(interactiveSelector)));
     };
 
+    const isTouchDevice = () => {
+      return 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    };
+
     const checkMobile = () => {
-      setIsVisible(window.innerWidth > 768);
+      setIsVisible(window.innerWidth > 768 && !isTouchDevice());
     };
 
     window.addEventListener('mousemove', onMove);

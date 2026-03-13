@@ -296,7 +296,7 @@ const WhatsAppButton = () => {
         /* Responsive */
         @media (max-width: 768px) {
           .wa-wrapper {
-            bottom: 88px;
+            bottom: 92px;
             right: 20px;
           }
 
@@ -319,10 +319,32 @@ const WhatsAppButton = () => {
         }
 
         @media (max-width: 480px) {
+          .wa-wrapper {
+            bottom: 88px;
+            right: 16px;
+          }
+
+          .wa-btn {
+            padding: 10px 14px;
+          }
+
+          .wa-icon-wrap {
+            width: 32px;
+            height: 32px;
+          }
+
+          .wa-text {
+            display: none;
+          }
+
           .wa-status {
-            top: auto;
-            bottom: -8px;
-            right: -8px;
+            top: -4px;
+            right: -4px;
+            padding: 3px 8px;
+          }
+
+          .wa-status span {
+            font-size: 9px;
           }
         }
       `}</style>

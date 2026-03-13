@@ -8,8 +8,8 @@ async function fetchJSON(path) {
 
 export const api = {
   getProducts:      () => fetchJSON('/products'),
-  getFeatured:      () => fetchJSON('/products/featured'),
-  getProduct:      (id) => fetchJSON(`/products/${id}`),
+  getFeatured:      () => fetchJSON('/products?featured=true'),
+  getProduct:      (id) => fetchJSON(`/products?id=${id}`),
   getCategories:    () => fetchJSON('/categories'),
   getGiftPackages:  () => fetchJSON('/gift-packages'),
   getBlogPosts:     () => fetchJSON('/blog-posts'),

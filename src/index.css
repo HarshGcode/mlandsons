@@ -11,6 +11,31 @@ body,
 #root {
   width: 100%;
   min-height: 100%;
+  overflow-x: hidden;
+}
+
+/* ── Mobile touch improvements ── */
+@media (max-width: 768px) {
+  html {
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  img, video {
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* Ensure no horizontal overflow on mobile */
+  body {
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Better touch targets */
+  button, a, input, select, textarea {
+    min-height: 44px;
+  }
 }
 
 body {
