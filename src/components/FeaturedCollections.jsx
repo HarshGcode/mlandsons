@@ -66,11 +66,11 @@ export default function FeaturedCollections() {
       <section className="ba-banner-section">
         <div className="ba-banner-inner">
           <div className="ba-banner-left">
-            <img
-              src="/gallery/img-17.jpeg"
-              alt="Vintage Rs 100 Currency Notes"
-              className="ba-banner-img"
-            />
+            <div className="ba-banner-img-row">
+              <img src="/gallery/img-17.jpeg" alt="Vintage ₹5 Note" className="ba-banner-img" />
+              <img src="/gallery/img-15.jpeg" alt="₹2 Note Tiger" className="ba-banner-img" />
+              <img src="/gallery/img-19.jpeg" alt="₹5 Note RBI" className="ba-banner-img" />
+            </div>
           </div>
           <div className="ba-banner-right">
             <p className="ba-banner-eyebrow">ML &amp; SONS</p>
@@ -291,16 +291,29 @@ export default function FeaturedCollections() {
           overflow: hidden;
         }
 
+        .ba-banner-img-row {
+          display: flex;
+          gap: 8px;
+          height: 100%;
+          min-height: 400px;
+          padding: 12px;
+          background: #0d0d0d;
+        }
+
         .ba-banner-img {
-          width: 100%;
+          flex: 1;
+          width: 0;
           height: 100%;
           object-fit: cover;
           display: block;
-          min-height: 400px;
-          filter: brightness(0.8);
-          transition: transform 0.6s ease;
+          border-radius: 4px;
+          filter: brightness(0.85);
+          transition: transform 0.4s ease, filter 0.3s;
         }
-        .ba-banner-left:hover .ba-banner-img { transform: scale(1.03); }
+        .ba-banner-img:hover {
+          transform: scale(1.03);
+          filter: brightness(1);
+        }
 
         .ba-banner-right {
           display: flex;
@@ -362,7 +375,7 @@ export default function FeaturedCollections() {
         @media (max-width: 768px) {
           .ba-banner-inner { grid-template-columns: 1fr; }
           .ba-banner-right { padding: 40px 28px; }
-          .ba-banner-img { min-height: 280px; }
+          .ba-banner-img-row { min-height: 220px; gap: 6px; padding: 8px; }
         }
 
         /* ── Showcase Strip ── */

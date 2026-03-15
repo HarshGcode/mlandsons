@@ -28,8 +28,11 @@ const About = () => {
               <div className="ba-about-img-main">
                 <img src="/gallery/img-10.jpeg" alt="George V Coin" className="ba-about-photo" />
               </div>
-              <div className="ba-about-img-secondary">
-                <img src="/gallery/img-16.jpeg" alt="Vintage Rs 5 Note" className="ba-about-photo" />
+              <div className="ba-about-img-main">
+                <img src="/gallery/img-16.jpeg" alt="Vintage ₹1 Note" className="ba-about-photo" />
+              </div>
+              <div className="ba-about-img-main">
+                <img src="/gallery/img-06.jpeg" alt="George V Silver Rupee" className="ba-about-photo" />
               </div>
             </div>
 
@@ -116,16 +119,17 @@ const About = () => {
 
         /* Image Side */
         .ba-about-img-side {
-          display: grid;
-          grid-template-rows: 2fr 1fr;
-          gap: 12px;
+          display: flex;
+          gap: 10px;
         }
 
-        .ba-about-img-main,
-        .ba-about-img-secondary {
+        .ba-about-img-main {
+          flex: 1;
           overflow: hidden;
           border: 1px solid #1a1a1a;
           position: relative;
+          border-radius: 4px;
+          min-height: 300px;
         }
 
         .ba-about-photo {
@@ -136,8 +140,7 @@ const About = () => {
           filter: brightness(0.8) saturate(0.9);
           transition: transform 0.6s ease, filter 0.3s;
         }
-        .ba-about-img-main:hover .ba-about-photo,
-        .ba-about-img-secondary:hover .ba-about-photo {
+        .ba-about-img-main:hover .ba-about-photo {
           transform: scale(1.04);
           filter: brightness(0.9) saturate(1);
         }
@@ -260,19 +263,15 @@ const About = () => {
 
         @media (max-width: 900px) {
           .ba-about-content { grid-template-columns: 1fr; }
-          .ba-about-img-side {
-            grid-template-rows: auto;
-            grid-template-columns: 1fr 1fr;
-          }
-          .ba-about-img-main,
-          .ba-about-img-secondary { height: 250px; }
+          .ba-about-img-main { min-height: 200px; }
         }
 
         @media (max-width: 560px) {
           .ba-about-values { grid-template-columns: 1fr; }
           .ba-about-ach { flex-direction: column; }
           .ba-about-ach-sep { width: 50px; height: 1px; }
-          .ba-about-img-side { grid-template-columns: 1fr; }
+          .ba-about-img-side { gap: 6px; }
+          .ba-about-img-main { min-height: 140px; }
         }
 
         /* Light theme */
@@ -291,8 +290,7 @@ const About = () => {
         [data-theme="light"] .ba-about-ach-label { color: rgba(0,0,0,0.4); }
         [data-theme="light"] .ba-about-ach-sep { background: #ddd; }
         [data-theme="light"] .ba-about-sub { color: rgba(0,0,0,0.5); }
-        [data-theme="light"] .ba-about-img-main,
-        [data-theme="light"] .ba-about-img-secondary { border-color: #e5e5e5; }
+        [data-theme="light"] .ba-about-img-main { border-color: #e5e5e5; }
       `}</style>
     </>
   );
