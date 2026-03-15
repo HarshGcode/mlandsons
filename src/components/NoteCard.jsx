@@ -90,16 +90,16 @@ const NoteCard = ({ product, saved, onToggleSave }) => {
           height: 100%;
           object-fit: cover;
           z-index: 0;
-          filter: brightness(0.55) saturate(0.7);
+          filter: brightness(0.85) saturate(0.9);
           transition: transform 0.6s ease;
           display: block;
         }
-        .nc-card:hover .nc-bg-img { transform: scale(1.07); }
+        .nc-card:hover .nc-bg-img { transform: scale(1.07); filter: brightness(0.95) saturate(1); }
 
         .nc-bg-overlay {
           position: absolute;
           inset: 0;
-          background: linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.3) 60%, rgba(0,0,0,0.1) 100%);
+          background: linear-gradient(to top, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0.05) 100%);
           z-index: 1;
           pointer-events: none;
         }
