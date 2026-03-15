@@ -5,22 +5,22 @@ import { CONDITIONS, formatPrice } from '../data/currencyData';
 const collectionImages = [
   {
     title: "Antique Coins",
-    img: "https://www.tezbid.com/cdn/shop/files/L09I01_580x.jpg",
+    img: "/gallery/img-01.jpeg",
     count: "120+ pieces",
   },
   {
     title: "Rare Currency Notes",
-    img: "https://rukminim2.flixcart.com/image/480/640/xif0q/printed-currency/8/z/2/1-10-different-old-note-collection-1-naaz-rare-collection-original-imahfdszbzgf2gfe.jpeg",
+    img: "/gallery/img-16.jpeg",
     count: "200+ pieces",
   },
   {
-    title: "Collector Currency",
-    img: "https://images.unsplash.com/photo-1567427017947-545c5f8d16ad?w=600&q=80",
+    title: "Unique Serial Notes",
+    img: "/gallery/img-03.jpeg",
     count: "150+ pieces",
   },
   {
-    title: "Date Notes & Gifts",
-    img: "https://www.marketcalls.in/wp-content/uploads/2011/11/History-of-Rupee.jpg",
+    title: "Vintage Notes & Gifts",
+    img: "/gallery/img-18.jpeg",
     count: "300+ pieces",
   },
 ];
@@ -51,10 +51,10 @@ export default function FeaturedCollections() {
                 <div className="ba-col-img-wrap">
                   <img src={col.img} alt={col.title} className="ba-col-img" loading="lazy" />
                   <div className="ba-col-img-overlay" />
-                </div>
-                <div className="ba-col-label">
-                  <span className="ba-col-name">{col.title}</span>
-                  <span className="ba-col-count">{col.count}</span>
+                  <div className="ba-col-img-label">
+                    <span className="ba-col-img-name">{col.title}</span>
+                    <span className="ba-col-img-count">{col.count}</span>
+                  </div>
                 </div>
               </div>
             ))}
@@ -67,8 +67,8 @@ export default function FeaturedCollections() {
         <div className="ba-banner-inner">
           <div className="ba-banner-left">
             <img
-              src="https://images.unsplash.com/photo-1567427017947-545c5f8d16ad?w=800&q=80"
-              alt="Rare collection"
+              src="/gallery/img-17.jpeg"
+              alt="Vintage Rs 100 Currency Notes"
               className="ba-banner-img"
             />
           </div>
@@ -83,6 +83,30 @@ export default function FeaturedCollections() {
             <button className="ba-banner-btn" onClick={() => navigate?.('collections')}>
               Explore Collection →
             </button>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Rare Showcase Strip ── */}
+      <section className="ba-showcase-section">
+        <div className="ba-showcase-inner">
+          <div className="ba-showcase-strip">
+            <div className="ba-showcase-item">
+              <img src="/gallery/img-06.jpeg" alt="George V" className="ba-showcase-img" loading="lazy" />
+            </div>
+            <div className="ba-showcase-item">
+              <img src="/gallery/img-09.jpeg" alt="1916 Coin" className="ba-showcase-img" loading="lazy" />
+            </div>
+            <div className="ba-showcase-item ba-showcase-text">
+              <p className="ba-showcase-quote">"History in your hands — every piece tells a story of India's rich heritage"</p>
+              <span className="ba-showcase-attr">— ML & Sons, Est. 1999</span>
+            </div>
+            <div className="ba-showcase-item">
+              <img src="/gallery/img-14.jpeg" alt="Vintage note" className="ba-showcase-img" loading="lazy" />
+            </div>
+            <div className="ba-showcase-item">
+              <img src="/gallery/img-11.jpeg" alt="1913 Coin" className="ba-showcase-img" loading="lazy" />
+            </div>
           </div>
         </div>
       </section>
@@ -194,7 +218,7 @@ export default function FeaturedCollections() {
 
         .ba-col-img-wrap {
           position: relative;
-          padding-bottom: 110%;
+          padding-bottom: 120%;
           overflow: hidden;
           background: #111;
         }
@@ -213,29 +237,34 @@ export default function FeaturedCollections() {
         .ba-col-img-overlay {
           position: absolute;
           inset: 0;
-          background: linear-gradient(to top, rgba(0,0,0,0.5) 0%, transparent 50%);
+          background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 60%);
           pointer-events: none;
         }
 
-        .ba-col-label {
-          padding: 14px 0 4px;
+        .ba-col-img-label {
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          padding: 20px 16px;
+          z-index: 2;
           display: flex;
           flex-direction: column;
-          gap: 3px;
+          gap: 4px;
         }
 
-        .ba-col-name {
-          font-family: 'Jost', sans-serif;
-          font-size: 14px;
-          font-weight: 500;
+        .ba-col-img-name {
+          font-family: 'Cormorant Garamond', serif;
+          font-size: 22px;
+          font-weight: 600;
           color: #fff;
-          letter-spacing: 0.04em;
+          letter-spacing: 0.02em;
         }
 
-        .ba-col-count {
+        .ba-col-img-count {
           font-family: 'Jost', sans-serif;
           font-size: 12px;
-          color: rgba(255,255,255,0.4);
+          color: rgba(255,255,255,0.5);
           letter-spacing: 0.04em;
         }
 
@@ -245,7 +274,7 @@ export default function FeaturedCollections() {
         /* ── Banner / Story Section ── */
         .ba-banner-section {
           background: #0a0a0a;
-          padding: 0 0 80px;
+          padding: 0 0 0;
         }
 
         .ba-banner-inner {
@@ -334,6 +363,88 @@ export default function FeaturedCollections() {
           .ba-banner-inner { grid-template-columns: 1fr; }
           .ba-banner-right { padding: 40px 28px; }
           .ba-banner-img { min-height: 280px; }
+        }
+
+        /* ── Showcase Strip ── */
+        .ba-showcase-section {
+          background: #0a0a0a;
+          padding: 60px 0;
+        }
+
+        .ba-showcase-inner {
+          max-width: 1360px;
+          margin: 0 auto;
+          padding: 0 32px;
+        }
+
+        .ba-showcase-strip {
+          display: grid;
+          grid-template-columns: repeat(5, 1fr);
+          gap: 1px;
+          background: #1a1a1a;
+          border: 1px solid #1a1a1a;
+        }
+
+        .ba-showcase-item {
+          position: relative;
+          overflow: hidden;
+          height: 320px;
+          background: #0a0a0a;
+        }
+
+        .ba-showcase-img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          display: block;
+          filter: brightness(0.75) saturate(0.9);
+          transition: transform 0.6s ease, filter 0.4s;
+        }
+        .ba-showcase-item:hover .ba-showcase-img {
+          transform: scale(1.06);
+          filter: brightness(0.9) saturate(1);
+        }
+
+        .ba-showcase-text {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          padding: 32px 24px;
+          text-align: center;
+          background: #111;
+        }
+
+        .ba-showcase-quote {
+          font-family: 'Cormorant Garamond', serif;
+          font-size: 18px;
+          font-weight: 600;
+          font-style: italic;
+          color: rgba(255,255,255,0.7);
+          line-height: 1.6;
+          margin-bottom: 16px;
+        }
+
+        .ba-showcase-attr {
+          font-family: 'Jost', sans-serif;
+          font-size: 10px;
+          font-weight: 500;
+          letter-spacing: 0.18em;
+          text-transform: uppercase;
+          color: rgba(255,255,255,0.3);
+        }
+
+        @media (max-width: 900px) {
+          .ba-showcase-strip { grid-template-columns: repeat(3, 1fr); }
+          .ba-showcase-item:nth-child(4),
+          .ba-showcase-item:nth-child(5) { display: none; }
+        }
+        @media (max-width: 600px) {
+          .ba-showcase-strip { grid-template-columns: 1fr; }
+          .ba-showcase-item { height: 250px; }
+          .ba-showcase-item:nth-child(2),
+          .ba-showcase-item:nth-child(4),
+          .ba-showcase-item:nth-child(5) { display: none; }
         }
 
         /* ── Featured Products Grid ── */
@@ -466,12 +577,13 @@ export default function FeaturedCollections() {
         /* Light theme */
         [data-theme="light"] .ba-col-section,
         [data-theme="light"] .ba-banner-section,
-        [data-theme="light"] .ba-feat-section {
+        [data-theme="light"] .ba-feat-section,
+        [data-theme="light"] .ba-showcase-section {
           background: #f9f6f0;
         }
         [data-theme="light"] .ba-col-card,
         [data-theme="light"] .ba-feat-card { border-color: #e5e5e5; }
-        [data-theme="light"] .ba-col-name,
+        [data-theme="light"] .ba-col-img-name,
         [data-theme="light"] .ba-sec-title,
         [data-theme="light"] .ba-feat-name,
         [data-theme="light"] .ba-feat-price,
@@ -487,6 +599,10 @@ export default function FeaturedCollections() {
         [data-theme="light"] .ba-banner-btn:hover { background: #000; color: #fff; }
         [data-theme="light"] .ba-sec-viewall { color: rgba(0,0,0,0.5); }
         [data-theme="light"] .ba-sec-viewall:hover { color: #000; }
+        [data-theme="light"] .ba-showcase-strip { background: #ddd; border-color: #ddd; }
+        [data-theme="light"] .ba-showcase-text { background: #f0ede6; }
+        [data-theme="light"] .ba-showcase-quote { color: rgba(0,0,0,0.6); }
+        [data-theme="light"] .ba-showcase-attr { color: rgba(0,0,0,0.3); }
       `}</style>
     </>
   );

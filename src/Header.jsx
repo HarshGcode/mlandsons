@@ -373,6 +373,72 @@ export default function Header() {
         }
         .ba-drawer-call:hover { color: #fff; }
 
+        /* ── Mobile Header Fix ── */
+        @media (max-width: 480px) {
+          .ba-header-inner {
+            padding: 0 12px;
+            height: 60px;
+          }
+
+          .ba-logo {
+            padding: 6px 14px;
+          }
+
+          .ba-logo-text {
+            font-size: 14px;
+            letter-spacing: 0.12em;
+          }
+
+          .ba-logo-sub {
+            font-size: 7px;
+            letter-spacing: 0.16em;
+          }
+
+          .ba-header-icons {
+            gap: 0px;
+          }
+
+          .ba-icon-btn {
+            width: 32px;
+            height: 32px;
+          }
+
+          .ba-icon-btn svg {
+            width: 16px;
+            height: 16px;
+          }
+
+          .ba-burger {
+            padding: 4px;
+          }
+
+          .ba-ann-text {
+            font-size: 9px;
+            letter-spacing: 0.08em;
+          }
+
+          .ba-ann {
+            height: 34px;
+            gap: 8px;
+          }
+        }
+
+        @media (max-width: 360px) {
+          .ba-logo {
+            padding: 5px 10px;
+          }
+
+          .ba-logo-text {
+            font-size: 12px;
+            letter-spacing: 0.1em;
+          }
+
+          .ba-icon-btn {
+            width: 28px;
+            height: 28px;
+          }
+        }
+
         /* ── Light theme support ── */
         [data-theme="light"] .ba-ann { background: #f5f5f5; border-color: #e5e5e5; }
         [data-theme="light"] .ba-ann-text { color: #333; }

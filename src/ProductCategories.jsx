@@ -7,18 +7,21 @@ const categories = [
     title: "Rare Date Notes",
     description: "Special serial number notes and memorable date notes perfect for gifting to your loved ones on special occasions.",
     tag: "Best Seller",
+    image: "/gallery/img-12.jpeg",
   },
   {
     id: 2,
     title: "Antique Coins",
     description: "Historic coins from different eras, carefully preserved and authenticated for serious collectors.",
     tag: "Most Rare",
+    image: "/gallery/img-05.jpeg",
   },
   {
     id: 3,
     title: "Collector Currency",
     description: "Rare and unique currency notes for enthusiasts who appreciate history and fine craftsmanship.",
     tag: "Premium",
+    image: "/gallery/img-15.jpeg",
   },
 ];
 
@@ -36,24 +39,30 @@ const ProductCategories = () => {
             </p>
           </div>
 
-          {/* Cards */}
+          {/* Cards with images */}
           <div className="ba-pc-grid">
-            {categories.map(({ id, title, description, tag }) => (
+            {categories.map(({ id, title, description, tag, image }) => (
               <div key={id} className="ba-pc-card">
-                <span className="ba-pc-tag">{tag}</span>
-                <h3 className="ba-pc-card-title">{title}</h3>
-                <p className="ba-pc-card-desc">{description}</p>
-                <div className="ba-pc-card-divider" />
-                <button
-                  className="ba-pc-cta"
-                  onClick={() => {
-                    const el = document.getElementById("contact");
-                    if (el) el.scrollIntoView({ behavior: "smooth" });
-                  }}
-                >
-                  <span>Enquire Now</span>
-                  <ArrowRight size={14} />
-                </button>
+                <div className="ba-pc-card-img-wrap">
+                  <img src={image} alt={title} className="ba-pc-card-img" loading="lazy" />
+                  <div className="ba-pc-card-img-overlay" />
+                  <span className="ba-pc-tag">{tag}</span>
+                </div>
+                <div className="ba-pc-card-body">
+                  <h3 className="ba-pc-card-title">{title}</h3>
+                  <p className="ba-pc-card-desc">{description}</p>
+                  <div className="ba-pc-card-divider" />
+                  <button
+                    className="ba-pc-cta"
+                    onClick={() => {
+                      const el = document.getElementById("contact");
+                      if (el) el.scrollIntoView({ behavior: "smooth" });
+                    }}
+                  >
+                    <span>Enquire Now</span>
+                    <ArrowRight size={14} />
+                  </button>
+                </div>
               </div>
             ))}
           </div>
@@ -107,32 +116,73 @@ const ProductCategories = () => {
         .ba-pc-grid {
           display: grid;
           grid-template-columns: repeat(3, 1fr);
-          gap: 1px;
-          background: #1a1a1a;
-          border: 1px solid #1a1a1a;
+          gap: 16px;
           margin-bottom: 48px;
         }
 
         .ba-pc-card {
-          background: #0a0a0a;
-          padding: 36px 32px;
-          display: flex;
-          flex-direction: column;
-          gap: 14px;
-          transition: background 0.2s;
+          background: #0e0e0e;
+          border: 1px solid #1a1a1a;
+          overflow: hidden;
+          transition: border-color 0.3s, transform 0.3s;
         }
-        .ba-pc-card:hover { background: #111; }
+        .ba-pc-card:hover {
+          border-color: #333;
+          transform: translateY(-4px);
+        }
+
+        .ba-pc-card-img-wrap {
+          position: relative;
+          padding-bottom: 65%;
+          overflow: hidden;
+          background: #111;
+        }
+
+        .ba-pc-card-img {
+          position: absolute;
+          inset: 0;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          display: block;
+          filter: brightness(0.8);
+          transition: transform 0.6s ease, filter 0.3s;
+        }
+        .ba-pc-card:hover .ba-pc-card-img {
+          transform: scale(1.06);
+          filter: brightness(0.65);
+        }
+
+        .ba-pc-card-img-overlay {
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(to top, rgba(0,0,0,0.5) 0%, transparent 60%);
+          pointer-events: none;
+        }
 
         .ba-pc-tag {
+          position: absolute;
+          top: 14px;
+          left: 14px;
           font-family: 'Jost', sans-serif;
           font-size: 10px;
           font-weight: 500;
           letter-spacing: 0.14em;
           text-transform: uppercase;
-          color: rgba(255,255,255,0.35);
-          border: 1px solid rgba(255,255,255,0.12);
-          padding: 4px 10px;
-          width: fit-content;
+          color: #fff;
+          background: rgba(0,0,0,0.5);
+          backdrop-filter: blur(8px);
+          -webkit-backdrop-filter: blur(8px);
+          border: 1px solid rgba(255,255,255,0.15);
+          padding: 5px 12px;
+          z-index: 2;
+        }
+
+        .ba-pc-card-body {
+          padding: 24px 24px 20px;
+          display: flex;
+          flex-direction: column;
+          gap: 12px;
         }
 
         .ba-pc-card-title {
@@ -248,12 +298,11 @@ const ProductCategories = () => {
 
         /* Light theme */
         [data-theme="light"] .ba-pc-section { background: #f9f6f0; }
-        [data-theme="light"] .ba-pc-grid { background: #ddd; border-color: #ddd; }
-        [data-theme="light"] .ba-pc-card { background: #f9f6f0; }
-        [data-theme="light"] .ba-pc-card:hover { background: #f0ede6; }
+        [data-theme="light"] .ba-pc-card { background: #f9f6f0; border-color: #e5e5e5; }
+        [data-theme="light"] .ba-pc-card:hover { border-color: #ccc; }
         [data-theme="light"] .ba-pc-card-title { color: #111; }
         [data-theme="light"] .ba-pc-card-desc { color: rgba(0,0,0,0.5); }
-        [data-theme="light"] .ba-pc-tag { color: rgba(0,0,0,0.4); border-color: rgba(0,0,0,0.15); }
+        [data-theme="light"] .ba-pc-tag { color: #fff; }
         [data-theme="light"] .ba-pc-card-divider { background: #e5e5e5; }
         [data-theme="light"] .ba-pc-cta { color: rgba(0,0,0,0.45); }
         [data-theme="light"] .ba-pc-cta:hover { color: #000; }

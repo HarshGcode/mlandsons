@@ -21,8 +21,18 @@ const About = () => {
             A legacy of trust, authenticity, and passion for antique currency since 1999
           </p>
 
-          {/* Content Grid */}
+          {/* Content Grid with Image */}
           <div className="ba-about-content">
+            {/* Image Side */}
+            <div className="ba-about-img-side">
+              <div className="ba-about-img-main">
+                <img src="/gallery/img-10.jpeg" alt="George V Coin" className="ba-about-photo" />
+              </div>
+              <div className="ba-about-img-secondary">
+                <img src="/gallery/img-16.jpeg" alt="Vintage Rs 5 Note" className="ba-about-photo" />
+              </div>
+            </div>
+
             {/* Story */}
             <div className="ba-about-story">
               <h3 className="ba-about-story-h3">Our Journey</h3>
@@ -40,16 +50,16 @@ const About = () => {
                 <span className="ba-about-sig-line" />
                 <span className="ba-about-sig-text">Est. 1999, Agra</span>
               </div>
-            </div>
 
-            {/* Values Grid */}
-            <div className="ba-about-values">
-              {values.map(({ title, desc }) => (
-                <div key={title} className="ba-about-value">
-                  <h4 className="ba-about-value-title">{title}</h4>
-                  <p className="ba-about-value-desc">{desc}</p>
-                </div>
-              ))}
+              {/* Values Grid */}
+              <div className="ba-about-values">
+                {values.map(({ title, desc }) => (
+                  <div key={title} className="ba-about-value">
+                    <h4 className="ba-about-value-title">{title}</h4>
+                    <p className="ba-about-value-desc">{desc}</p>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
 
@@ -99,17 +109,44 @@ const About = () => {
         /* Content Grid */
         .ba-about-content {
           display: grid;
-          grid-template-columns: 1.2fr 1fr;
-          gap: 1px;
-          background: #1a1a1a;
-          border: 1px solid #1a1a1a;
+          grid-template-columns: 1fr 1.3fr;
+          gap: 32px;
           margin-bottom: 48px;
+        }
+
+        /* Image Side */
+        .ba-about-img-side {
+          display: grid;
+          grid-template-rows: 2fr 1fr;
+          gap: 12px;
+        }
+
+        .ba-about-img-main,
+        .ba-about-img-secondary {
+          overflow: hidden;
+          border: 1px solid #1a1a1a;
+          position: relative;
+        }
+
+        .ba-about-photo {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          display: block;
+          filter: brightness(0.8) saturate(0.9);
+          transition: transform 0.6s ease, filter 0.3s;
+        }
+        .ba-about-img-main:hover .ba-about-photo,
+        .ba-about-img-secondary:hover .ba-about-photo {
+          transform: scale(1.04);
+          filter: brightness(0.9) saturate(1);
         }
 
         /* Story */
         .ba-about-story {
-          background: #0a0a0a;
-          padding: 40px 36px;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
         }
 
         .ba-about-story-h3 {
@@ -133,7 +170,8 @@ const About = () => {
           display: flex;
           align-items: center;
           gap: 14px;
-          margin-top: 28px;
+          margin-top: 12px;
+          margin-bottom: 32px;
         }
 
         .ba-about-sig-line {
@@ -156,11 +194,12 @@ const About = () => {
           grid-template-columns: 1fr 1fr;
           gap: 1px;
           background: #1a1a1a;
+          border: 1px solid #1a1a1a;
         }
 
         .ba-about-value {
           background: #0a0a0a;
-          padding: 32px 28px;
+          padding: 24px 20px;
           transition: background 0.2s;
         }
         .ba-about-value:hover { background: #111; }
@@ -221,23 +260,28 @@ const About = () => {
 
         @media (max-width: 900px) {
           .ba-about-content { grid-template-columns: 1fr; }
+          .ba-about-img-side {
+            grid-template-rows: auto;
+            grid-template-columns: 1fr 1fr;
+          }
+          .ba-about-img-main,
+          .ba-about-img-secondary { height: 250px; }
         }
 
         @media (max-width: 560px) {
           .ba-about-values { grid-template-columns: 1fr; }
           .ba-about-ach { flex-direction: column; }
           .ba-about-ach-sep { width: 50px; height: 1px; }
+          .ba-about-img-side { grid-template-columns: 1fr; }
         }
 
         /* Light theme */
         [data-theme="light"] .ba-about-section { background: #f9f6f0; }
-        [data-theme="light"] .ba-about-content { background: #ddd; border-color: #ddd; }
-        [data-theme="light"] .ba-about-story { background: #f9f6f0; }
         [data-theme="light"] .ba-about-story-h3 { color: #111; }
         [data-theme="light"] .ba-about-story-p { color: rgba(0,0,0,0.55); }
         [data-theme="light"] .ba-about-sig-line { background: rgba(0,0,0,0.15); }
         [data-theme="light"] .ba-about-sig-text { color: rgba(0,0,0,0.35); }
-        [data-theme="light"] .ba-about-values { background: #ddd; }
+        [data-theme="light"] .ba-about-values { background: #ddd; border-color: #ddd; }
         [data-theme="light"] .ba-about-value { background: #f9f6f0; }
         [data-theme="light"] .ba-about-value:hover { background: #f0ede6; }
         [data-theme="light"] .ba-about-value-title { color: #111; }
@@ -247,6 +291,8 @@ const About = () => {
         [data-theme="light"] .ba-about-ach-label { color: rgba(0,0,0,0.4); }
         [data-theme="light"] .ba-about-ach-sep { background: #ddd; }
         [data-theme="light"] .ba-about-sub { color: rgba(0,0,0,0.5); }
+        [data-theme="light"] .ba-about-img-main,
+        [data-theme="light"] .ba-about-img-secondary { border-color: #e5e5e5; }
       `}</style>
     </>
   );
