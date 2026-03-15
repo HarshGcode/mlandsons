@@ -51,7 +51,7 @@ const Footer = () => {
               Trusted by collectors across India for over 25 years.
             </p>
             <div className="ba-footer-social">
-              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="ba-social-link" aria-label="Instagram">
+              <a href="https://www.instagram.com/mlandsons7/" target="_blank" rel="noopener noreferrer" className="ba-social-link" aria-label="Instagram">
                 <Instagram size={16} />
               </a>
               <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="ba-social-link" aria-label="Facebook">
