@@ -337,14 +337,18 @@ export default function ProductDetailPage() {
 
         .pdp-img-container {
           position: relative;
-          background: #111;
+          background: #0d0d0d;
+          width: 100%;
+          padding-bottom: 56.25%;
+          overflow: hidden;
         }
 
         .pdp-product-img {
+          position: absolute;
+          inset: 0;
           width: 100%;
-          height: auto;
+          height: 100%;
           display: block;
-          min-height: 320px;
           object-fit: contain;
           background: #0d0d0d;
         }
@@ -755,7 +759,7 @@ export default function ProductDetailPage() {
 
         .pdp-related-grid {
           display: grid;
-          grid-template-columns: repeat(3, 1fr);
+          grid-template-columns: repeat(2, 1fr);
           gap: 16px;
         }
 
@@ -804,7 +808,7 @@ export default function ProductDetailPage() {
           .pdp-layout { flex-direction: column; }
           .pdp-left { max-width: 100%; flex: none; position: static; }
         }
-        @media (max-width: 700px) {
+        @media (max-width: 768px) {
           .pdp-related-grid { grid-template-columns: 1fr; }
         }
 
