@@ -1,46 +1,32 @@
-import React, { useState } from "react";
+import React from "react";
 
 const galleryItems = [
-  { id: 1, title: "Victoria Empress Silver Coin", tag: "Antique Coins", image: "/gallery/img-02.jpeg", era: "1889" },
-  { id: 2, title: "One Rupee India 1918", tag: "Heritage Coins", image: "/gallery/img-07.jpeg", era: "1918" },
-  { id: 3, title: "Rs 20 Solid Serial 222222", tag: "Fancy Number", image: "/gallery/img-01.jpeg", era: "Modern" },
-  { id: 4, title: "Government of India One Rupee", tag: "Vintage Notes", image: "/gallery/img-14.jpeg", era: "Pre-1950" },
-  { id: 5, title: "Rs 100 Vintage Bundle", tag: "Rare Notes", image: "/gallery/img-17.jpeg", era: "1960s" },
-  { id: 6, title: "Vintage 10 Rupee Notes", tag: "Collector's Item", image: "/gallery/img-19.jpeg", era: "1970s" },
-  { id: 7, title: "George V King Emperor Coin", tag: "British India", image: "/gallery/img-10.jpeg", era: "1913" },
-  { id: 8, title: "Rs 2 Vintage Note", tag: "Rare Notes", image: "/gallery/img-15.jpeg", era: "1960s" },
-  { id: 9, title: "Rs 5 Reserve Bank Note", tag: "Vintage Notes", image: "/gallery/img-16.jpeg", era: "1970s" },
-  { id: 10, title: "Rs 10 Consecutive Serial Bundle", tag: "Special Bundle", image: "/gallery/img-12.jpeg", era: "Modern" },
-  { id: 11, title: "George VI Emperor Coin", tag: "British India", image: "/gallery/img-04.jpeg", era: "1940s" },
-  { id: 12, title: "One Rupee India 1889", tag: "Heritage Coins", image: "/gallery/img-03.jpeg", era: "1889" },
+  { id: 1, title: "Victoria Empress 1889 Silver", tag: "Antique Coins", image: "/products/victoria-empress-1889-front.jpeg" },
+  { id: 2, title: "Solid Serial ₹20 (222222)", tag: "Fancy Serial", image: "/products/20rs-solid-222222.jpeg" },
+  { id: 3, title: "₹200 Star Note Bundle", tag: "Star Notes", image: "/products/200rs-star-full.jpeg" },
+  { id: 4, title: "Vintage ₹100 Reserve Bank Note", tag: "Vintage Notes", image: "/products/100rs-vintage-single.jpeg" },
+  { id: 5, title: "George V King Emperor Rupee", tag: "British India", image: "/products/george-v-rupee-front.jpeg" },
+  { id: 6, title: "Solid Trio Set (333+444+555)", tag: "Premium Bundle", image: "/products/50rs-solid-trio.jpeg" },
 ];
 
 const Gallery = () => {
-  const [hoveredId, setHoveredId] = useState(null);
-
   return (
     <>
       <section id="gallery" className="ba-gl-section">
         <div className="ba-gl-inner">
 
           {/* Header */}
-          <div className="ba-gl-header">
-            <p className="ba-gl-eyebrow">Our Collection</p>
-            <h2 className="ba-gl-title">Rare Pieces. Real Stories.</h2>
-            <p className="ba-gl-sub">
-              Browse through our exquisite collection of antique coins, currency notes, and special edition pieces — each one authenticated and preserved with care.
-            </p>
+          <div className="ba-sec-header">
+            <h2 className="ba-sec-title">Gallery</h2>
           </div>
+          <p className="ba-gl-sub">
+            Browse through our exquisite collection of antique coins, currency notes, and special date notes.
+          </p>
 
-          {/* Masonry-style Grid */}
+          {/* Grid */}
           <div className="ba-gl-grid">
-            {galleryItems.map((item, index) => (
-              <div
-                key={item.id}
-                className={`ba-gl-card ba-gl-card--${index < 2 ? 'tall' : index < 4 ? 'wide' : 'normal'}`}
-                onMouseEnter={() => setHoveredId(item.id)}
-                onMouseLeave={() => setHoveredId(null)}
-              >
+            {galleryItems.map((item) => (
+              <div key={item.id} className="ba-gl-card">
                 <div className="ba-gl-img-wrap">
                   <img
                     src={item.image}
@@ -49,11 +35,10 @@ const Gallery = () => {
                     loading="lazy"
                   />
                   <div className="ba-gl-overlay" />
-                  <div className={`ba-gl-hover-info ${hoveredId === item.id ? 'ba-gl-hover-info--visible' : ''}`}>
-                    <span className="ba-gl-hover-era">{item.era}</span>
-                    <h3 className="ba-gl-hover-title">{item.title}</h3>
-                    <span className="ba-gl-hover-tag">{item.tag}</span>
-                  </div>
+                </div>
+                <div className="ba-gl-info">
+                  <span className="ba-gl-tag">{item.tag}</span>
+                  <h3 className="ba-gl-card-title">{item.title}</h3>
                 </div>
               </div>
             ))}
@@ -61,7 +46,7 @@ const Gallery = () => {
 
           {/* Footer note */}
           <div className="ba-gl-note">
-            All items are 100% authenticated &nbsp;&middot;&nbsp; New arrivals every week &nbsp;&middot;&nbsp; Visit us in Agra
+            All items are 100% authenticated &nbsp;·&nbsp; New arrivals every week &nbsp;·&nbsp; Visit us in Agra
           </div>
 
         </div>
@@ -69,9 +54,9 @@ const Gallery = () => {
 
       <style>{`
         .ba-gl-section {
-          background: #0a0a0a;
-          padding: 100px 0;
-          border-top: 1px solid #1a1a1a;
+          background: #fff;
+          padding: 80px 0;
+          border-top: 1px solid #e5e5e5;
         }
 
         .ba-gl-inner {
@@ -80,187 +65,101 @@ const Gallery = () => {
           padding: 0 32px;
         }
 
-        .ba-gl-header {
-          text-align: center;
-          margin-bottom: 60px;
-        }
-
-        .ba-gl-eyebrow {
-          font-family: 'Jost', sans-serif;
-          font-size: 11px;
-          font-weight: 500;
-          letter-spacing: 0.22em;
-          text-transform: uppercase;
-          color: rgba(255,255,255,0.4);
-          margin-bottom: 16px;
-        }
-
-        .ba-gl-title {
-          font-family: 'Cormorant Garamond', serif;
-          font-size: clamp(32px, 5vw, 52px);
-          font-weight: 700;
-          color: #fff;
-          letter-spacing: 0.02em;
-          margin-bottom: 16px;
-          line-height: 1.1;
-        }
-
         .ba-gl-sub {
           font-family: 'Jost', sans-serif;
           font-size: 14px;
           font-weight: 300;
-          color: rgba(255,255,255,0.45);
-          max-width: 560px;
-          margin: 0 auto;
+          color: rgba(0,0,0,0.5);
+          margin: 8px 0 36px;
           line-height: 1.7;
         }
 
         .ba-gl-grid {
           display: grid;
-          grid-template-columns: repeat(4, 1fr);
-          grid-auto-rows: 280px;
-          gap: 12px;
-          margin-bottom: 48px;
-        }
-
-        /* First two items span 2 rows for visual variety */
-        .ba-gl-card--tall:nth-child(1) {
-          grid-row: span 2;
-          grid-column: span 2;
-        }
-        .ba-gl-card--tall:nth-child(2) {
-          grid-row: span 2;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 16px;
+          margin-bottom: 40px;
         }
 
         .ba-gl-card {
           position: relative;
           overflow: hidden;
           cursor: pointer;
-          border: 1px solid #1a1a1a;
-          transition: border-color 0.3s;
+          border: 1px solid #e5e5e5;
+          transition: border-color 0.3s, box-shadow 0.3s;
+          border-radius: 4px;
         }
-        .ba-gl-card:hover { border-color: #333; }
+        .ba-gl-card:hover { border-color: #ccc; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
 
         .ba-gl-img-wrap {
           position: relative;
-          width: 100%;
-          height: 100%;
+          padding-bottom: 75%;
           overflow: hidden;
-          background: #111;
+          background: #fff;
         }
 
         .ba-gl-img {
+          position: absolute;
+          inset: 0;
           width: 100%;
           height: 100%;
-          object-fit: cover;
+          object-fit: contain;
           display: block;
-          filter: brightness(0.85);
-          transition: transform 0.6s ease, filter 0.3s;
+          transition: transform 0.6s ease;
+          padding: 8px;
         }
         .ba-gl-card:hover .ba-gl-img {
-          transform: scale(1.08);
-          filter: brightness(0.6);
+          transform: scale(1.06);
         }
 
         .ba-gl-overlay {
-          position: absolute;
-          inset: 0;
-          background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 60%);
-          pointer-events: none;
+          display: none;
         }
 
-        /* Hover info */
-        .ba-gl-hover-info {
-          position: absolute;
-          bottom: 0;
-          left: 0;
-          right: 0;
-          padding: 24px 20px;
-          transform: translateY(10px);
-          opacity: 0;
-          transition: all 0.35s ease;
-          z-index: 2;
+        .ba-gl-info {
+          padding: 14px 12px 10px;
+          display: flex;
+          flex-direction: column;
+          gap: 4px;
+          border-top: 1px solid #f0f0f0;
         }
 
-        .ba-gl-hover-info--visible {
-          transform: translateY(0);
-          opacity: 1;
-        }
-
-        .ba-gl-hover-era {
+        .ba-gl-tag {
           font-family: 'Jost', sans-serif;
           font-size: 10px;
           font-weight: 500;
-          letter-spacing: 0.16em;
+          letter-spacing: 0.12em;
           text-transform: uppercase;
-          color: rgba(255,255,255,0.5);
-          display: block;
-          margin-bottom: 6px;
+          color: rgba(0,0,0,0.4);
         }
 
-        .ba-gl-hover-title {
-          font-family: 'Cormorant Garamond', serif;
-          font-size: 20px;
-          font-weight: 600;
-          color: #fff;
-          line-height: 1.2;
-          margin-bottom: 8px;
-        }
-
-        .ba-gl-hover-tag {
+        .ba-gl-card-title {
           font-family: 'Jost', sans-serif;
-          font-size: 11px;
-          font-weight: 400;
-          letter-spacing: 0.1em;
-          text-transform: uppercase;
-          color: rgba(255,255,255,0.4);
-          border: 1px solid rgba(255,255,255,0.15);
-          padding: 3px 10px;
-          display: inline-block;
+          font-size: 14px;
+          font-weight: 500;
+          color: #1a1a1a;
+          letter-spacing: 0.02em;
         }
 
         .ba-gl-note {
           text-align: center;
           font-family: 'Jost', sans-serif;
           font-size: 12px;
-          color: rgba(255,255,255,0.3);
+          color: rgba(0,0,0,0.35);
           letter-spacing: 0.06em;
           padding: 20px 0 0;
-          border-top: 1px solid #1a1a1a;
+          border-top: 1px solid #e5e5e5;
         }
 
         @media (max-width: 900px) {
-          .ba-gl-grid {
-            grid-template-columns: repeat(2, 1fr);
-            grid-auto-rows: 240px;
-          }
-          .ba-gl-card--tall:nth-child(1) {
-            grid-row: span 2;
-            grid-column: span 1;
-          }
+          .ba-gl-grid { grid-template-columns: repeat(2, 1fr); }
         }
         @media (max-width: 500px) {
-          .ba-gl-grid {
-            grid-template-columns: 1fr;
-            grid-auto-rows: 300px;
-          }
-          .ba-gl-card--tall:nth-child(1) {
-            grid-row: span 1;
-            grid-column: span 1;
-          }
-          .ba-gl-card--tall:nth-child(2) {
-            grid-row: span 1;
-          }
+          .ba-gl-grid { grid-template-columns: 1fr; }
         }
 
-        /* Light theme */
+        /* Light theme already white, minimal overrides */
         [data-theme="light"] .ba-gl-section { background: #f9f6f0; }
-        [data-theme="light"] .ba-gl-card { border-color: #e5e5e5; }
-        [data-theme="light"] .ba-gl-card:hover { border-color: #ccc; }
-        [data-theme="light"] .ba-gl-title { color: #111; }
-        [data-theme="light"] .ba-gl-eyebrow { color: rgba(0,0,0,0.4); }
-        [data-theme="light"] .ba-gl-note { color: rgba(0,0,0,0.35); border-color: #e5e5e5; }
-        [data-theme="light"] .ba-gl-sub { color: rgba(0,0,0,0.5); }
       `}</style>
     </>
   );
