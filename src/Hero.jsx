@@ -2,17 +2,17 @@ import React, { useEffect, useState } from "react";
 
 const heroSlides = [
   {
-    img: "/products/victoria-empress-1889-front.jpeg",
+    images: ["/gallery/img-17.jpeg", "/gallery/img-19.jpeg", "/gallery/img-16.jpeg"],
     heading: "ANTIQUE CURRENCY SHOP",
     sub: "RARE COINS, NOTES & COLLECTIBLE TREASURES",
   },
   {
-    img: "/products/50rs-solid-trio.jpeg",
+    images: ["/gallery/img-01.jpeg", "/gallery/img-07.jpeg", "/gallery/img-09.jpeg"],
     heading: "DISCOVER RARE TREASURES",
     sub: "AUTHENTIC ANTIQUES TRUSTED SINCE GENERATIONS",
   },
   {
-    img: "/products/100rs-vintage-single.jpeg",
+    images: ["/gallery/img-03.jpeg", "/gallery/img-14.jpeg", "/gallery/img-18.jpeg"],
     heading: "COLLECTIBLES & RARE PIECES",
     sub: "CURATED FROM AGRA — SHIPPED WORLDWIDE",
   },
@@ -51,20 +51,26 @@ const Hero = ({ onViewCollection }) => {
   return (
     <>
       <section id="home" className="ba-hero">
-        {/* Background image */}
-        <div
-          className={`ba-hero-bg ${fading ? "ba-hero-bg--fade" : ""}`}
-          style={{ backgroundImage: `url(${current.img})` }}
-        />
-        <div className="ba-hero-overlay" />
+        {/* Background gradient */}
+        <div className="ba-hero-gradient" />
 
         {/* Content */}
         <div className={`ba-hero-content ${fading ? "ba-hero-content--fade" : ""}`}>
           <p className="ba-hero-eyebrow">ML &amp; SONS — EST. AGRA</p>
           <h1 className="ba-hero-h1">{current.heading}</h1>
           <p className="ba-hero-sub">{current.sub}</p>
+
+          {/* Horizontal image strip */}
+          <div className="ba-hero-images">
+            {current.images.map((img, i) => (
+              <div key={i} className="ba-hero-img-card">
+                <img src={img} alt="" />
+              </div>
+            ))}
+          </div>
+
           <button className="ba-hero-btn" onClick={handleShopAll}>
-            Shop All
+            SHOP ALL
           </button>
         </div>
 
@@ -92,43 +98,18 @@ const Hero = ({ onViewCollection }) => {
 
         .ba-hero {
           position: relative;
-          height: 100vh;
-          min-height: 560px;
+          min-height: 100vh;
           display: flex;
           align-items: center;
           justify-content: center;
           overflow: hidden;
-          background: #000;
+          background: #0a0a0a;
         }
 
-        .ba-hero-bg {
+        .ba-hero-gradient {
           position: absolute;
           inset: 0;
-          background-size: contain;
-          background-position: center;
-          background-repeat: no-repeat;
-          background-color: #fff;
-          transform: scale(1.04);
-          transition: opacity 0.4s ease;
-          animation: ba-ken-burns 12s ease-in-out infinite alternate;
-        }
-
-        .ba-hero-bg--fade { opacity: 0; }
-
-        @keyframes ba-ken-burns {
-          from { transform: scale(1.04); }
-          to   { transform: scale(1.12); }
-        }
-
-        .ba-hero-overlay {
-          position: absolute;
-          inset: 0;
-          background: linear-gradient(
-            to bottom,
-            rgba(0,0,0,0.35) 0%,
-            rgba(0,0,0,0.5) 50%,
-            rgba(0,0,0,0.7) 100%
-          );
+          background: radial-gradient(ellipse at center, rgba(40,35,25,0.5) 0%, #0a0a0a 70%);
           pointer-events: none;
         }
 
@@ -137,8 +118,9 @@ const Hero = ({ onViewCollection }) => {
           position: relative;
           z-index: 2;
           text-align: center;
-          padding: 0 24px;
-          max-width: 800px;
+          padding: 80px 24px 60px;
+          max-width: 900px;
+          width: 100%;
           transition: opacity 0.4s ease;
         }
 
@@ -149,31 +131,60 @@ const Hero = ({ onViewCollection }) => {
           font-size: 11px;
           font-weight: 500;
           letter-spacing: 0.22em;
-          color: rgba(255,255,255,0.65);
+          color: rgba(255,255,255,0.55);
           text-transform: uppercase;
-          margin-bottom: 18px;
+          margin-bottom: 16px;
         }
 
         .ba-hero-h1 {
           font-family: 'Cormorant Garamond', serif;
-          font-size: clamp(38px, 6vw, 80px);
+          font-size: clamp(32px, 5.5vw, 68px);
           font-weight: 700;
           color: #fff;
-          line-height: 1.08;
+          line-height: 1.1;
           letter-spacing: 0.06em;
           text-transform: uppercase;
-          margin-bottom: 18px;
-          text-shadow: 0 4px 30px rgba(0,0,0,0.5);
+          margin-bottom: 14px;
         }
 
         .ba-hero-sub {
           font-family: 'Jost', sans-serif;
-          font-size: clamp(12px, 1.5vw, 14px);
+          font-size: clamp(11px, 1.4vw, 13px);
           font-weight: 400;
           letter-spacing: 0.16em;
-          color: rgba(255,255,255,0.7);
+          color: rgba(255,255,255,0.55);
           text-transform: uppercase;
+          margin-bottom: 32px;
+        }
+
+        /* ── Horizontal Image Strip ── */
+        .ba-hero-images {
+          display: flex;
+          justify-content: center;
+          gap: 16px;
           margin-bottom: 36px;
+        }
+
+        .ba-hero-img-card {
+          width: 220px;
+          height: 180px;
+          border-radius: 6px;
+          overflow: hidden;
+          border: 1px solid rgba(255,255,255,0.12);
+          background: #111;
+          transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .ba-hero-img-card:hover {
+          transform: translateY(-4px);
+          border-color: rgba(255,255,255,0.3);
+        }
+
+        .ba-hero-img-card img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          display: block;
         }
 
         .ba-hero-btn {
@@ -194,6 +205,30 @@ const Hero = ({ onViewCollection }) => {
         .ba-hero-btn:hover {
           background: #fff;
           color: #000;
+        }
+
+        @media (max-width: 600px) {
+          .ba-hero-images {
+            gap: 10px;
+          }
+          .ba-hero-img-card {
+            width: 110px;
+            height: 100px;
+            border-radius: 4px;
+          }
+          .ba-hero-content {
+            padding: 60px 16px 40px;
+          }
+        }
+
+        @media (max-width: 360px) {
+          .ba-hero-img-card {
+            width: 90px;
+            height: 85px;
+          }
+          .ba-hero-images {
+            gap: 8px;
+          }
         }
 
         /* ── Dots ── */
@@ -260,7 +295,8 @@ const Hero = ({ onViewCollection }) => {
 
         @media (max-width: 600px) {
           .ba-hero-scroll { display: none; }
-          .ba-hero-btn { padding: 12px 28px; }
+          .ba-hero-btn { padding: 12px 28px; font-size: 11px; }
+          .ba-hero-dots { bottom: 20px; }
         }
       `}</style>
     </>

@@ -62,13 +62,12 @@ function extractYear(text) {
 function extractCategory(text) {
   const t = text.toLowerCase();
   const map = {
-    'coin': 'antique-coins', 'coins': 'antique-coins', 'british': 'antique-coins', 'victoria': 'antique-coins', 'george': 'antique-coins',
-    'vintage': 'vintage-notes', 'old note': 'vintage-notes', 'old currency': 'vintage-notes', 'rbi': 'vintage-notes',
-    'note': 'fancy-serial', 'notes': 'vintage-notes', 'currency note': 'vintage-notes',
-    'serial': 'fancy-serial', 'fancy': 'fancy-serial', 'ladder': 'fancy-serial', 'radar': 'fancy-serial', 'solid': 'fancy-serial', '786': 'fancy-serial',
-    'star': 'star-notes', 'star note': 'star-notes',
-    'bundle': 'bundles', 'set': 'bundles', 'combo': 'bundles', 'collection set': 'bundles',
-    'gift': 'gifting', 'birthday': 'gifting', 'anniversary': 'gifting', 'wedding': 'gifting', 'occasion': 'gifting',
+    'coin': 'rare-coins', 'coins': 'rare-coins',
+    'note': 'antique-notes', 'notes': 'antique-notes', 'currency note': 'antique-notes',
+    'birthday': 'birthday-notes', 'birth': 'birthday-notes',
+    'anniversary': 'anniversary', 'wedding': 'anniversary',
+    'serial': 'unique-serial', 'fancy': 'unique-serial', 'ladder': 'unique-serial', 'radar': 'unique-serial', 'solid': 'unique-serial',
+    'event': 'event-notes', 'special': 'event-notes', 'republic': 'event-notes', 'independence': 'event-notes', 'gandhi': 'event-notes', 'millennium': 'event-notes',
   };
   for (const [keyword, catId] of Object.entries(map)) {
     if (t.includes(keyword)) return catId;
