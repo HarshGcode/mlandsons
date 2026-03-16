@@ -22,7 +22,8 @@ const Contact = () => {
 
   const [formData, setFormData] = useState({
     name: "", phone: "", email: "", state: "", city: "",
-    address: "", inquiryType: "", itemType: "", details: ""
+    address: "", inquiryType: "", itemType: "", details: "",
+    _honeypot: "" // Hidden anti-bot field
   });
 
   const handleChange = (field, value) =>
@@ -55,7 +56,8 @@ const Contact = () => {
         setSubmitted(false);
         setFormData({
           name: "", phone: "", email: "", state: "", city: "",
-          address: "", inquiryType: "", itemType: "", details: ""
+          address: "", inquiryType: "", itemType: "", details: "",
+          _honeypot: ""
         });
       }, 3000);
     } catch {
@@ -79,6 +81,16 @@ const Contact = () => {
 
           {/* Form */}
           <form className="ba-ct-form" onSubmit={handleSubmit}>
+            {/* Honeypot — hidden from real users, bots will fill it */}
+            <input
+              type="text"
+              name="_honeypot"
+              value={formData._honeypot}
+              onChange={(e) => handleChange("_honeypot", e.target.value)}
+              style={{ position: "absolute", left: "-9999px", opacity: 0, height: 0, width: 0, tabIndex: -1 }}
+              autoComplete="off"
+              aria-hidden="true"
+            />
 
             {/* Success */}
             {submitted && (
