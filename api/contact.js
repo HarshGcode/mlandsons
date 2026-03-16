@@ -1,4 +1,4 @@
-import { neon } from '@neondatabase/serverless';
+import { createClient } from '@supabase/supabase-js';
 import { secureHandler } from './_security.js';
 
 // Basic input sanitizer — strips HTML tags and trims
@@ -41,18 +41,36 @@ async function handler(req, res) {
       return res.status(400).json({ error: 'Invalid email format' });
     }
 
-    // Connect to Neon (Vercel Postgres) and save to database
-    const sql = neon(process.env.DATABASE_URL);
+    // Connect to Supabase
+    const supabase = createClient(
+      process.env.SUPABASE_URL,
+      process.env.SUPABASE_SERVICE_KEY
+    );
 
-    const result = await sql`
-      INSERT INTO contacts (name, phone, email, state, city, address, inquiry_type, item_type, details)
-      VALUES (${name}, ${phone}, ${email}, ${state}, ${city}, ${address}, ${inquiryType}, ${itemType}, ${details})
-      RETURNING id
-    `;
+    const { data, error } = await supabase
+      .from('contacts')
+      .insert({
+        name,
+        phone,
+        email,
+        state,
+        city,
+        address,
+        inquiry_type: inquiryType,
+        item_type: itemType,
+        details,
+      })
+      .select('id')
+      .single();
+
+    if (error) {
+      console.error('Supabase insert error:', error);
+      return res.status(500).json({ error: 'Failed to save contact' });
+    }
 
     return res.status(201).json({
       success: true,
-      id: result[0].id,
+      id: data.id,
       message: 'Thank you for reaching out! We will contact you shortly.'
     });
   } catch (err) {
