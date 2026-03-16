@@ -1,3 +1,4 @@
+import { neon } from '@neondatabase/serverless';
 import { secureHandler } from './_security.js';
 
 // Basic input sanitizer — strips HTML tags and trims
@@ -16,7 +17,7 @@ function isValidPhone(phone) {
   return /^[\d\s\+\-()]{7,15}$/.test(phone);
 }
 
-function handler(req, res) {
+async function handler(req, res) {
   try {
     const body = req.body || {};
     const name = sanitize(body.name);
@@ -40,15 +41,18 @@ function handler(req, res) {
       return res.status(400).json({ error: 'Invalid email format' });
     }
 
-    console.log('Contact form submission:', {
-      name, phone, email, state, city, address, inquiryType, itemType, details,
-      ip: req.headers['x-forwarded-for'] || 'unknown',
-      timestamp: new Date().toISOString()
-    });
+    // Connect to Neon (Vercel Postgres) and save to database
+    const sql = neon(process.env.DATABASE_URL);
+
+    const result = await sql`
+      INSERT INTO contacts (name, phone, email, state, city, address, inquiry_type, item_type, details)
+      VALUES (${name}, ${phone}, ${email}, ${state}, ${city}, ${address}, ${inquiryType}, ${itemType}, ${details})
+      RETURNING id
+    `;
 
     return res.status(201).json({
       success: true,
-      id: `contact-${Date.now()}`,
+      id: result[0].id,
       message: 'Thank you for reaching out! We will contact you shortly.'
     });
   } catch (err) {

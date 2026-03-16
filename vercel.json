@@ -35,6 +35,7 @@
     { "source": "/api/platform-stats", "destination": "/api/platform-stats" },
     { "source": "/api/contact", "destination": "/api/contact" },
     { "source": "/api/health", "destination": "/api/health" },
+    { "source": "/api/setup-db", "destination": "/api/setup-db" },
     { "source": "/(.*)", "destination": "/index.html" }
   ]
 }
