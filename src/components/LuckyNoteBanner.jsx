@@ -58,7 +58,7 @@ export default function LuckyNoteBanner() {
         .ba-lnb-hero-bg {
           position: absolute;
           inset: 0;
-          background-image: url('https://www.marketcalls.in/wp-content/uploads/2011/11/History-of-Rupee.jpg');
+          background-image: url('/gallery/img-13.jpeg');
           background-size: cover;
           background-position: center;
           background-repeat: no-repeat;

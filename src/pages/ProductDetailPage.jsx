@@ -87,33 +87,32 @@ export default function ProductDetailPage() {
         {/* Two-column layout */}
         <div className="pdp-layout">
 
-          {/* LEFT: Note Visual */}
+          {/* LEFT: Product Image */}
           <div className="pdp-left">
             <div className="pdp-note-card">
-              <div className="pdp-note-body" style={{ background: noteGradient }}>
-                {/* Header */}
-                <div className="pdp-note-header">
-                  <div>
-                    <p className="pdp-note-label">Government of India</p>
-                    <p className="pdp-note-label" style={{ opacity: 0.5 }}>Reserve Bank of India</p>
+              {/* Main product image */}
+              <div className="pdp-img-container">
+                {product.image ? (
+                  <img src={product.image} alt={product.name} className="pdp-product-img" />
+                ) : (
+                  <div className="pdp-note-body" style={{ background: noteGradient }}>
+                    <div className="pdp-note-denom">
+                      <div className="pdp-note-denom-value">
+                        {product.denomination || product.name?.split(' ')[0]}
+                      </div>
+                    </div>
                   </div>
-                  <div className="pdp-note-year">{product.year || 'N/A'}</div>
-                </div>
+                )}
+              </div>
 
-                {/* Denomination */}
-                <div className="pdp-note-denom">
-                  <div className="pdp-note-denom-value">
-                    {product.denomination || product.name?.split(' ')[0]}
-                  </div>
-                  <div className="pdp-note-denom-cat">
-                    {product.category || 'Currency'}
-                  </div>
+              {/* Info strip below image */}
+              <div className="pdp-img-info-strip" style={{ background: noteGradient }}>
+                <div className="pdp-img-info-left">
+                  <span className="pdp-img-info-denom">{product.denomination}</span>
+                  <span className="pdp-img-info-year">{product.year}</span>
                 </div>
-
-                {/* Serial */}
-                <div className="pdp-note-serial-row">
-                  <span className="pdp-note-serial">{product.serialNumber || 'XX-000000'}</span>
-                  <span className="pdp-note-serial">{product.serialNumber || 'XX-000000'}</span>
+                <div className="pdp-img-info-right">
+                  <span className="pdp-img-info-serial">{product.serialNumber || 'N/A'}</span>
                 </div>
               </div>
 
@@ -336,33 +335,31 @@ export default function ProductDetailPage() {
           overflow: hidden;
         }
 
+        .pdp-img-container {
+          position: relative;
+          background: #0d0d0d;
+          width: 100%;
+          padding-bottom: 56.25%;
+          overflow: hidden;
+        }
+
+        .pdp-product-img {
+          position: absolute;
+          inset: 0;
+          width: 100%;
+          height: 100%;
+          display: block;
+          object-fit: contain;
+          background: #0d0d0d;
+        }
+
         .pdp-note-body {
           padding: 32px 28px;
           min-height: 320px;
           display: flex;
           flex-direction: column;
-          justify-content: space-between;
-        }
-
-        .pdp-note-header {
-          display: flex;
-          justify-content: space-between;
-          align-items: flex-start;
-        }
-
-        .pdp-note-label {
-          font-size: 10px;
-          color: rgba(255,255,255,0.5);
-          letter-spacing: 2px;
-          font-family: 'Jost', sans-serif;
-          margin: 0 0 2px;
-          text-transform: uppercase;
-        }
-
-        .pdp-note-year {
-          font-size: 11px;
-          color: rgba(255,255,255,0.4);
-          font-family: 'Jost', sans-serif;
+          justify-content: center;
+          align-items: center;
         }
 
         .pdp-note-denom {
@@ -379,21 +376,38 @@ export default function ProductDetailPage() {
           text-shadow: 0 2px 12px rgba(0,0,0,0.3);
         }
 
-        .pdp-note-denom-cat {
-          font-size: 11px;
-          color: rgba(255,255,255,0.4);
-          letter-spacing: 3px;
-          font-family: 'Jost', sans-serif;
-          margin-top: 6px;
-          text-transform: uppercase;
-        }
-
-        .pdp-note-serial-row {
+        .pdp-img-info-strip {
           display: flex;
           justify-content: space-between;
+          align-items: center;
+          padding: 14px 20px;
         }
 
-        .pdp-note-serial {
+        .pdp-img-info-left {
+          display: flex;
+          align-items: baseline;
+          gap: 12px;
+        }
+
+        .pdp-img-info-denom {
+          font-family: 'Cormorant Garamond', serif;
+          font-size: 22px;
+          font-weight: 700;
+          color: rgba(255,255,255,0.85);
+        }
+
+        .pdp-img-info-year {
+          font-size: 12px;
+          color: rgba(255,255,255,0.45);
+          font-family: 'Jost', sans-serif;
+        }
+
+        .pdp-img-info-right {
+          display: flex;
+          align-items: center;
+        }
+
+        .pdp-img-info-serial {
           font-family: 'Courier New', monospace;
           font-size: 12px;
           color: rgba(255,255,255,0.55);
@@ -745,7 +759,7 @@ export default function ProductDetailPage() {
 
         .pdp-related-grid {
           display: grid;
-          grid-template-columns: repeat(3, 1fr);
+          grid-template-columns: repeat(2, 1fr);
           gap: 16px;
         }
 
@@ -794,7 +808,7 @@ export default function ProductDetailPage() {
           .pdp-layout { flex-direction: column; }
           .pdp-left { max-width: 100%; flex: none; position: static; }
         }
-        @media (max-width: 700px) {
+        @media (max-width: 768px) {
           .pdp-related-grid { grid-template-columns: 1fr; }
         }
 

@@ -7,30 +7,19 @@ const NoteCard = ({ product, saved, onToggleSave }) => {
 
   return (
     <div className="nc-card">
-      {/* Note visual */}
-      <div className="nc-note-visual" style={{ background: product.gradient || '#111' }}>
-        {product.image && (
-          <img
-            src={product.image}
-            alt=""
-            className="nc-bg-img"
-            onError={e => { e.currentTarget.style.display = 'none'; }}
-          />
+      {/* Image side */}
+      <div className="nc-img-side">
+        {product.image ? (
+          <img src={product.image} alt={product.name} className="nc-product-img"
+            onError={e => { e.currentTarget.style.display = 'none'; }} />
+        ) : (
+          <div className="nc-img-placeholder" style={{ background: product.gradient || '#111' }}>
+            <span className="nc-ph-denom">{product.denomination}</span>
+          </div>
         )}
-        <div className="nc-bg-overlay" />
-
-        <div className="nc-note-top">
-          <span className="nc-denom">{product.denomination}</span>
-          <span className="nc-year">{product.year}</span>
-        </div>
-        <div className="nc-note-bottom">
-          <span className="nc-serial">{product.serialNumber}</span>
-        </div>
-
         {product.rarity && (
           <span className="nc-rarity-badge">{product.rarity}</span>
         )}
-
         <button
           className={`nc-save-btn ${saved ? 'saved' : ''}`}
           onClick={e => { e.stopPropagation(); onToggleSave?.(product.id); }}
@@ -39,7 +28,7 @@ const NoteCard = ({ product, saved, onToggleSave }) => {
         </button>
       </div>
 
-      {/* Info */}
+      {/* Info side */}
       <div className="nc-info">
         <div className="nc-name">{product.name}</div>
         <div className="nc-meta">
@@ -67,80 +56,57 @@ const NoteCard = ({ product, saved, onToggleSave }) => {
           transition: border-color 0.3s, background 0.2s;
           cursor: pointer;
           font-family: 'Jost', sans-serif;
+          display: flex;
+          flex-direction: row;
         }
         .nc-card:hover {
           border-color: #333;
           background: #111;
         }
 
-        .nc-note-visual {
+        .nc-img-side {
           position: relative;
-          height: 160px;
+          width: 180px;
+          min-width: 180px;
           overflow: hidden;
-          display: flex;
-          flex-direction: column;
-          justify-content: space-between;
-          padding: 12px 14px;
+          background: #111;
+          flex-shrink: 0;
         }
 
-        .nc-bg-img {
-          position: absolute;
-          inset: 0;
+        .nc-product-img {
           width: 100%;
           height: 100%;
           object-fit: cover;
-          z-index: 0;
-          filter: brightness(0.55) saturate(0.7);
-          transition: transform 0.6s ease;
           display: block;
+          min-height: 140px;
+          transition: transform 0.6s ease;
         }
-        .nc-card:hover .nc-bg-img { transform: scale(1.07); }
+        .nc-card:hover .nc-product-img { transform: scale(1.05); }
 
-        .nc-bg-overlay {
-          position: absolute;
-          inset: 0;
-          background: linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.3) 60%, rgba(0,0,0,0.1) 100%);
-          z-index: 1;
-          pointer-events: none;
-        }
-
-        .nc-note-top, .nc-note-bottom {
+        .nc-img-placeholder {
+          width: 100%;
+          height: 100%;
+          min-height: 140px;
           display: flex;
-          justify-content: space-between;
           align-items: center;
-          position: relative;
-          z-index: 2;
+          justify-content: center;
         }
 
-        .nc-denom {
+        .nc-ph-denom {
           font-family: 'Cormorant Garamond', serif;
-          font-size: 22px;
+          font-size: 28px;
           font-weight: 700;
-          color: rgba(255,255,255,0.85);
-          text-shadow: 0 2px 8px rgba(0,0,0,0.5);
-        }
-
-        .nc-year {
-          font-size: 12px;
-          color: rgba(255,255,255,0.45);
-          font-weight: 400;
-        }
-
-        .nc-serial {
-          font-size: 11px;
-          color: rgba(255,255,255,0.45);
-          font-family: 'Courier New', monospace;
-          letter-spacing: 0.08em;
+          color: rgba(255,255,255,0.7);
         }
 
         .nc-rarity-badge {
           position: absolute;
-          top: 10px;
-          right: 10px;
+          top: 8px;
+          left: 8px;
           z-index: 3;
-          font-size: 10px;
+          font-size: 9px;
           font-weight: 600;
-          padding: 3px 8px;
+          padding: 2px 7px;
           background: #fff;
           color: #000;
           letter-spacing: 0.06em;
@@ -149,17 +115,17 @@ const NoteCard = ({ product, saved, onToggleSave }) => {
 
         .nc-save-btn {
           position: absolute;
-          bottom: 10px;
-          right: 12px;
+          bottom: 8px;
+          right: 8px;
           background: rgba(0,0,0,0.5);
           border: 1px solid rgba(255,255,255,0.15);
-          width: 28px;
-          height: 28px;
+          width: 26px;
+          height: 26px;
           display: flex;
           align-items: center;
           justify-content: center;
           cursor: pointer;
-          font-size: 14px;
+          font-size: 13px;
           color: rgba(255,255,255,0.5);
           transition: all 0.2s;
           z-index: 3;
@@ -175,7 +141,10 @@ const NoteCard = ({ product, saved, onToggleSave }) => {
           display: flex;
           flex-direction: column;
           gap: 8px;
-          border-top: 1px solid #1a1a1a;
+          border-left: 1px solid #1a1a1a;
+          flex: 1;
+          justify-content: center;
+          min-width: 0;
         }
 
         .nc-name {
@@ -241,6 +210,15 @@ const NoteCard = ({ product, saved, onToggleSave }) => {
           background: #fff;
           color: #000;
           border-color: #fff;
+        }
+
+        @media (max-width: 480px) {
+          .nc-img-side {
+            width: 130px;
+            min-width: 130px;
+          }
+          .nc-info { padding: 10px 12px; }
+          .nc-name { font-size: 12px; }
         }
 
         /* Light theme */

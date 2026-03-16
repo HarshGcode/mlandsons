@@ -266,7 +266,7 @@ export default function CollectionsFullPage() {
 
         .cfp-grid {
           display: grid;
-          grid-template-columns: repeat(3, 1fr);
+          grid-template-columns: repeat(2, 1fr);
           gap: 16px;
         }
 
@@ -313,10 +313,7 @@ export default function CollectionsFullPage() {
           border-color: #fff;
         }
 
-        @media (max-width: 1024px) {
-          .cfp-grid { grid-template-columns: repeat(2, 1fr); }
-        }
-        @media (max-width: 640px) {
+        @media (max-width: 768px) {
           .cfp-grid { grid-template-columns: 1fr; }
         }
 

@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 import { api } from '../services/api';
+import { PRODUCTS, CATEGORIES, GIFT_PACKAGES, BLOG_POSTS, PLATFORM_STATS } from '../data/staticData';
 
 const DataContext = createContext(null);
 
@@ -28,8 +29,12 @@ export function DataProvider({ children }) {
         setPlatformStats(s);
       })
       .catch((err) => {
-        console.error('DataProvider fetch error:', err);
-        setError(err.message);
+        console.error('DataProvider: API failed, using embedded data:', err.message);
+        setProducts(PRODUCTS);
+        setCategories(CATEGORIES);
+        setGiftPackages(GIFT_PACKAGES);
+        setBlogPosts(BLOG_POSTS);
+        setPlatformStats(PLATFORM_STATS);
       })
       .finally(() => setLoading(false));
   }, []);

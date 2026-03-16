@@ -56,7 +56,7 @@ export default function GiftBanner() {
         .ba-gb-hero-bg {
           position: absolute;
           inset: 0;
-          background-image: url('https://rukminim2.flixcart.com/image/480/640/xif0q/printed-currency/8/z/2/1-10-different-old-note-collection-1-naaz-rare-collection-original-imahfdszbzgf2gfe.jpeg');
+          background-image: url('/gallery/img-18.jpeg');
           background-size: cover;
           background-position: center;
           background-repeat: no-repeat;
