@@ -1,24 +1,76 @@
-export default function handler(req, res) {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+import { createClient } from '@supabase/supabase-js';
+import { secureHandler } from './_security.js';
 
-  if (req.method === 'OPTIONS') return res.status(200).end();
+// Basic input sanitizer — strips HTML tags and trims
+function sanitize(str) {
+  if (typeof str !== 'string') return '';
+  return str.replace(/<[^>]*>/g, '').trim().slice(0, 500);
+}
 
-  if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Method not allowed' });
-  }
+// Validate email format
+function isValidEmail(email) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
 
+// Validate phone (Indian format or international)
+function isValidPhone(phone) {
+  return /^[\d\s\+\-()]{7,15}$/.test(phone);
+}
+
+async function handler(req, res) {
   try {
-    const { name, phone, email, state, city, address, inquiryType, itemType, details } = req.body;
+    const body = req.body || {};
+    const name = sanitize(body.name);
+    const phone = sanitize(body.phone);
+    const email = sanitize(body.email);
+    const state = sanitize(body.state);
+    const city = sanitize(body.city);
+    const address = sanitize(body.address);
+    const inquiryType = sanitize(body.inquiryType);
+    const itemType = sanitize(body.itemType);
+    const details = sanitize(body.details);
 
-    // Log the contact submission (in production, you could send email or use a service)
-    console.log('Contact form submission:', { name, phone, email, state, city, address, inquiryType, itemType, details });
+    // Required field validation
+    if (!name || name.length < 2) {
+      return res.status(400).json({ error: 'Name is required (min 2 characters)' });
+    }
+    if (!phone || !isValidPhone(phone)) {
+      return res.status(400).json({ error: 'Valid phone number is required' });
+    }
+    if (email && !isValidEmail(email)) {
+      return res.status(400).json({ error: 'Invalid email format' });
+    }
 
-    // Return success (without database, we just acknowledge receipt)
+    // Connect to Supabase
+    const supabase = createClient(
+      process.env.SUPABASE_URL,
+      process.env.SUPABASE_SERVICE_KEY
+    );
+
+    const { data, error } = await supabase
+      .from('contacts')
+      .insert({
+        name,
+        phone,
+        email,
+        state,
+        city,
+        address,
+        inquiry_type: inquiryType,
+        item_type: itemType,
+        details,
+      })
+      .select('id')
+      .single();
+
+    if (error) {
+      console.error('Supabase insert error:', error);
+      return res.status(500).json({ error: 'Failed to save contact' });
+    }
+
     return res.status(201).json({
       success: true,
-      id: `contact-${Date.now()}`,
+      id: data.id,
       message: 'Thank you for reaching out! We will contact you shortly.'
     });
   } catch (err) {
@@ -26,3 +78,5 @@ export default function handler(req, res) {
     return res.status(500).json({ error: 'Failed to save contact' });
   }
 }
+
+export default secureHandler(handler, { allowedMethods: ['POST'], contactEndpoint: true });
