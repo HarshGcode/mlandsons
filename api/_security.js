@@ -7,8 +7,9 @@
 const ALLOWED_ORIGINS = [
   'https://mlandsons.com',
   'https://www.mlandsons.com',
+  'https://mlandsons.in',          // ← ADD THIS
+  'https://www.mlandsons.in',      // ← ADD THIS
   'https://mlandsons.vercel.app',
-  // Add any other deployment URLs here
 ];
 
 // In-memory rate limiter (per serverless instance)
